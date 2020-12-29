@@ -15,11 +15,7 @@ function setup() {
 	createCanvas(800, 700);
 	rectMode(CENTER);
 	
-	var options={
-		setStatic: true,
-		restitution: 0.3
-	}
-	packageSprite=createSprite(width/2, 80, 10,10,options);
+	packageSprite=createSprite(width/2, 80, 10,10);
 	packageSprite.addImage(packageIMG);
 	packageSprite.scale=0.2;
 	console.log(packageSprite);
@@ -40,18 +36,26 @@ function setup() {
 	ground = Bodies.rectangle(width/2, 650, width, 10 , {isStatic:true} );
  	World.add(world, ground);
 
+
+	dustbin1 = new Dustbin(540,560,20,200);
+	dustbin2 = new Dustbin(300,560,20,200);
+	dustbin3 = new Dustbin(420,650,260,20);
 	Engine.run(engine);
-    keyPressed();
 }
 
 function draw() {
+
+
   rectMode(CENTER);
   background(0);
+  text(mouseX+","+mouseY,50,50);
   packageSprite.x= packageBody.position.x ;
   packageSprite.y= packageBody.position.y ;
   packageSprite.velocityY=packageSprite.velocityY+1.5;
   drawSprites();
- 
+  dustbin1.display();
+  dustbin2.display();
+  dustbin3.display();
 }
 
 function keyPressed() {
